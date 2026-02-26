@@ -1,0 +1,88 @@
+spring:
+  application:
+    name: booking
+
+  # JPA configuration
+  datasource:
+    url: jdbc:postgresql://localhost:5432/booking
+    username: user
+    password: 123
+    driver-class-name: org.postgresql.Driver
+    tomcat:
+      test-on-borrow: true
+      validation-query: SELECT 1
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+    show-sql: ${SHOW_SQL:false}
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 10
+        order_updates: true
+        order_inserts: true
+        format_sql: true
+        generate_statistics: true
+        default_schema: public
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: reply.projects08@gmail.com
+    password: exir ttvl kfig owfe
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+  # Flyway configuration
+  flyway:
+    baseline-on-migrate: true
+    enabled: true
+    validate-on-migrate: true
+    baseline-version: 0
+    schemas: public
+    locations: classpath:db/migration
+    table: flyway_schema_history
+    #Kafka confugirations
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    group-id: test_group
+
+    client-id: test_client
+    acks-config: all
+    retries-config: 3
+    linger-ms-config: 100
+    client-dns-lookup: use_all_dns_ips  
+    batch-size-config: 16384
+    buffer-memory-config: 32768
+    auto-offset-reset-config: latest
+    topic:
+      booking-event-topic: BOOKING_EVENT
+      otp-event-topic: OTP_EVENT
+
+minio:
+  url: http://localhost:9000
+  access-key: minioadmin
+  secret-key: minioadmin
+  bucket: attachments
+
+application:
+  security:
+    jwt:
+      secret-key: TVptTUFyYzV0SnVvdUR3L3hLdy83SFpZR3dFeVgwdnpmcmJ4a1pieHZ4MExlTGdWRmdrY2xWUytlR2JObUFOUmZnaEZsK1d0Mlg4UTBUemJxK2tRU25PVXVROXVtK04vWUNVWEU1YzRGK0pyQ3lGSnJYUlZxYkdDVi9WdWNMY09hUm85MitkOVEzTmhZWmVXTVJheVJ6U2ZMSFR2Tjc2SDAwZGVPZXFsOGM5VUkxditveGYwZXJtUmJoTm5uZXZHbDZESVVPSEN3dnA1aFFmSUVGZjJTRFBMTUUrSnJ5NmVIcWVlL001dFB2SC9qWEV1ZlhLMmFUdWxVbnhpbE9HeGpTenJDZi90dndjcGE2b3FEV0hsT1VmNnRXQlFHeGQ0aXhGdlpYWGlCTG9GdVJiZE1QU09lYUZobk9oYXVQSGRFb3F0TG5QbkZZTGJIUTBFN2xBZQ==
+      expiration: 86400000 # a day
+      refresh-token:
+        expiration: 604800000 # 7 days
+
+bank:
+  receiver-name: CONSTANT_RECEIVER_NAME
+  receiver-token: CONSTANT_RECEIVER_TOKEN
+  merchant: 85ef6051-718f-49db-9a5c-c95525d0b74e
