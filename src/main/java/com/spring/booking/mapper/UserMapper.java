@@ -29,6 +29,8 @@ public interface UserMapper {
     @Mapping(target = "status", ignore = true)
     void update(@MappingTarget User ent, UserRequest request);
 
+
+    @Mapping(target = "authorities",ignore = true)
     UserAuth toUserAuth(User user);
 
 }

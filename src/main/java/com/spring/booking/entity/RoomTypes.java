@@ -6,7 +6,9 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -47,5 +49,5 @@ public class RoomTypes extends BaseEntity {
             joinColumns = @JoinColumn(name = "room_id"),
             inverseJoinColumns = @JoinColumn(name = "amenities_id")
     )
-    Set<Amenities> amenities = new HashSet<>();
+    Set<Amenities> amenities;
 }

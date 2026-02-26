@@ -15,6 +15,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -36,21 +38,21 @@ public class BookingController {
 
     @Operation(summary = "Get booking by ID", description = "Returns booking details by booking ID")
     @GetMapping("/{id}")
-    public BookingResponse get(@PathVariable Long id) {
+    public BookingResponse get(@PathVariable UUID id) {
         log.info("Getting booking with id: {}", id);
         return bookingService.get(id);
     }
 
     @Operation(summary = "Update booking", description = "Updates an existing booking by ID")
     @PutMapping("/{id}")
-    public BookingResponse update(@PathVariable Long id, @RequestBody BookingRequest request) {
+    public BookingResponse update(@PathVariable UUID id, @RequestBody BookingRequest request) {
         log.info("Updating booking with id: {}", id);
         return bookingService.update(id, request);
     }
 
     @Operation(summary = "Update booking status", description = "Updates only the status of a booking and sends Kafka event")
     @PatchMapping("/{id}/status")
-    public BookingResponse updateStatus(@PathVariable Long id, @RequestParam BookingStatus status) {
+    public BookingResponse updateStatus(@PathVariable UUID id, @RequestParam BookingStatus status) {
         log.info("Updating booking status. id={}, newStatus={}", id, status);
         return bookingService.updateStatus(id, status);
     }
@@ -64,7 +66,7 @@ public class BookingController {
 
     @Operation(summary = "Delete booking", description = "Deletes a booking by ID")
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable UUID id) {
         log.info("Deleting booking with id: {}", id);
         bookingService.delete(id);
     }

@@ -1,6 +1,7 @@
 package com.spring.booking.entity;
 
 import com.spring.booking.constant.enums.BookingStatus;
+import com.spring.booking.constant.enums.Currency;
 import com.spring.booking.dto.response.GuestInfo;
 import jakarta.persistence.*;
 import lombok.*;
@@ -12,6 +13,7 @@ import org.hibernate.type.SqlTypes;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -23,11 +25,8 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Bookings extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-
-    @Column(name = "booking_uuid")
-    String bookingUuid;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    UUID id;
 
     @Column(name = "user_id", insertable = false, updatable = false)
     Long userId;
@@ -46,7 +45,7 @@ public class Bookings extends BaseEntity {
     @Column(name = "room_id", insertable = false, updatable = false)
     Long roomId;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "room_id", nullable = false)
     Rooms room;
 
@@ -59,16 +58,16 @@ public class Bookings extends BaseEntity {
     @Column(name = "num_guests", nullable = false)
     Integer numGuests;
 
-    @Column(name = "total_price", nullable = false, precision = 10, scale = 2)
+    @Column(name = "total_price")
     BigDecimal totalPrice;
 
-    @Column(name = "currency", length = 3, nullable = false)
-    String currency = "USD";
+    @Column(name = "currency", length = 10)
+    @Enumerated(EnumType.STRING)
+    Currency currency;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", length = 40, nullable = false)
-    BookingStatus status = BookingStatus.BOOKING_PENDING_PAYMENT;
-
+    BookingStatus status;
 
     @Column(name = "special_requests", columnDefinition = "TEXT")
     String specialRequests;
@@ -77,9 +76,9 @@ public class Bookings extends BaseEntity {
     String paymentId;
 
     @JdbcTypeCode(SqlTypes.JSON)
-    @Column(name = "guests", columnDefinition = "jsonb")
+    @Column(name = "guests", columnDefinition = "jsonb",nullable = false)
     List<GuestInfo> guests;
 
     @Column(name = "expire_date")
-    private LocalDate expireDate;
+    LocalDate expireDate;
 }

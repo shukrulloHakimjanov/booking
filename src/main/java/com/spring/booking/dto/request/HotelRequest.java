@@ -10,7 +10,7 @@ public record HotelRequest(
         String name,
         String description,
         String address,
-        BigDecimal rating,
+        Float rating,
         LocalTime checkInTime,
         LocalTime checkOutTime,
         Set<Long> attachmentIds,

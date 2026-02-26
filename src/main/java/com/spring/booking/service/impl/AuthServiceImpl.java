@@ -43,12 +43,9 @@ public class AuthServiceImpl implements AuthService {
 
         User user = authMapper.fromDto(request);
 
-        user.setPasswordHash(passwordEncoder.encode(request.getPassword()));
-        user.setFirstName(request.getFirstname());
-        user.setLastName(request.getLastname());
+        user.setPasswordHash(passwordEncoder.encode(request.getPasswordHash()));
         user.setStatus(UserStatus.PENDING_VERIFICATION);
         user.setRole(Role.USER);
-        user.setPhone(request.getPhoneNumber());
 
         userRepo.save(user);
 

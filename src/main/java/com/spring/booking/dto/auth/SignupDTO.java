@@ -14,14 +14,14 @@ public class SignupDTO {
     @Email
     private String email;
     @NotNull
-    private String firstname;
-    private String lastname;
+    private String firstName;
+    private String lastName;
     @Size(min = 8)
     @NotNull
-    private String password;
+    private String passwordHash;
     @NotNull
     @Pattern(regexp = "[+](998)[0-9]{9}$")
-    private String phoneNumber;
+    private String phone;
 
 
 }

@@ -5,10 +5,11 @@ import com.spring.booking.constant.enums.PaymentStatus;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public record PaymentDTO(
         Long id,
-        Long bookingId,
+        UUID bookingId,
         BigDecimal amount,
         String currency,
         PaymentMethod paymentMethod,

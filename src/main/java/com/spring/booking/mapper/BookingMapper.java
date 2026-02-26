@@ -16,10 +16,20 @@ public interface BookingMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target = "isActive", ignore = true)
+    @Mapping(target = "user", ignore = true)
+    @Mapping(target = "hotel", ignore = true)
+    @Mapping(target = "room", ignore = true)
+    @Mapping(target = "expireDate", ignore = true)
     Bookings toEntity(BookingRequest request);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target = "active", ignore = true)
+    @Mapping(target = "user", ignore = true)
+    @Mapping(target = "hotel", ignore = true)
+    @Mapping(target = "room", ignore = true)
+    @Mapping(target = "expireDate", ignore = true)
     void update(@MappingTarget Bookings entity, BookingRequest request);
 }

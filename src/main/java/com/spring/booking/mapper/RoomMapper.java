@@ -13,6 +13,8 @@ public interface RoomMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target = "isActive", ignore = true)
+    @Mapping(target = "roomType", ignore = true)
     Rooms toEntity(RoomRequest dto);
 
     RoomResponse toResponse(Rooms ent);
@@ -20,6 +22,8 @@ public interface RoomMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target = "active", ignore = true)
+    @Mapping(target = "roomType", ignore = true)
     void update(@MappingTarget Rooms ent, RoomRequest request);
 
 }

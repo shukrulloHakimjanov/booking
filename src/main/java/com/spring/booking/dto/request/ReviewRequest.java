@@ -5,11 +5,13 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.util.UUID;
+
 public record ReviewRequest(
 
         @NotNull(message = "Booking ID cannot be null")
         @Min(value = 1, message = "Booking ID must be greater than 0")
-        Long bookingId,
+        UUID bookingId,
 
         @NotNull(message = "User ID cannot be null")
         @Min(value = 1, message = "User ID must be greater than 0")

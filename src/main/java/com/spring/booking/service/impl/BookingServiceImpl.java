@@ -62,7 +62,6 @@ public class BookingServiceImpl implements BookingService {
         booking.setUser(user);
         booking.setHotel(hotel);
         booking.setRoom(room);
-        booking.setBookingUuid(UUID.randomUUID().toString());
         booking.setStatus(BookingStatus.BOOKING_PENDING_PAYMENT);
         booking.setExpireDate(LocalDate.now().plusDays(2));
 
@@ -77,7 +76,7 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     @Transactional
-    public BookingResponse update(Long id, BookingRequest request) {
+    public BookingResponse update(UUID id, BookingRequest request) {
 
         Bookings booking = bookingRepository.findById(id).orElseThrow(() -> new BookingNotFoundException("Booking not found with id: " + id));
 
@@ -114,7 +113,7 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     @Transactional
-    public void updateStatusAndPaymentId(Long id, BookingStatus newStatus, String paymentId) {
+    public void updateStatusAndPaymentId(UUID id, BookingStatus newStatus, String paymentId) {
 
         Bookings booking = bookingRepository.findById(id)
                 .orElseThrow(() -> new BookingNotFoundException("Booking not found with id: " + id));
@@ -147,7 +146,7 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     @Transactional
-    public BookingResponse updateStatus(Long id, BookingStatus newStatus) {
+    public BookingResponse updateStatus(UUID id, BookingStatus newStatus) {
 
         Bookings booking = bookingRepository.findById(id).orElseThrow(() -> new BookingNotFoundException("Booking not found with id: " + id));
 
@@ -168,7 +167,7 @@ public class BookingServiceImpl implements BookingService {
 
 
     @Override
-    public BookingResponse get(Long id) {
+    public BookingResponse get(UUID id) {
         Bookings booking = bookingRepository.findById(id).orElseThrow(() -> new BookingNotFoundException("Booking not found with id: " + id));
         return bookingMapper.toResponse(booking);
     }
@@ -182,7 +181,7 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     @Transactional
-    public void delete(Long id) {
+    public void delete(UUID id) {
         if (!bookingRepository.existsById(id)) {
             throw new BookingNotFoundException("Booking not found with id: " + id);
         }

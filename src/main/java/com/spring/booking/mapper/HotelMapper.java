@@ -13,6 +13,11 @@ public interface HotelMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target = "isActive", ignore = true)
+    @Mapping(target = "owner", ignore = true)
+    @Mapping(target = "city", ignore = true)
+    @Mapping(target = "attachments", ignore = true)
+    @Mapping(target = "amenities", ignore = true)
     Hotels toEntity(HotelRequest dto);
 
     HotelResponse toResponse(Hotels hotel);
@@ -20,6 +25,11 @@ public interface HotelMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target = "active", ignore = true)
+    @Mapping(target = "owner", ignore = true)
+    @Mapping(target = "city", ignore = true)
+    @Mapping(target = "attachments", ignore = true)
+    @Mapping(target = "amenities", ignore = true)
     void update(@MappingTarget Hotels ent, HotelRequest request);
 
 }

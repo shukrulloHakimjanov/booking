@@ -39,7 +39,7 @@ public class BankAdapter {
 
         BankTransactionRequest bankRequest = new BankTransactionRequest();
 
-        bankRequest.setReferenceId(UUID.fromString(request.referenceId()));
+        bankRequest.setReferenceId(request.referenceId());
         bankRequest.setAmount(request.amount());
         bankRequest.setSenderName(request.senderName());
         bankRequest.setSenderToken(request.senderToken());

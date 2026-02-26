@@ -12,8 +12,12 @@ public interface AuthMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target = "isActive", ignore = true)
+    @Mapping(target = "status", ignore = true)
+    @Mapping(target = "role",ignore = true)
     User fromDto(SignupDTO dto);
 
+    @Mapping(target = "authorities",ignore = true)
     UserAuth toUserAuth(User entity);
 
 

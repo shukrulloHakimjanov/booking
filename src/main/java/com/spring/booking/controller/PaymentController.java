@@ -32,9 +32,9 @@ public class PaymentController {
     @Operation(summary = "Create a new payment via JBank")
     @PostMapping("/jbank")
     public ResponseEntity<String> createPaymentViaJBank(@RequestBody PaymentRequest request) {
-        log.info("Creating payment for bookingId={} amount={}", request.bookingId(), request.amount());
+        log.info("Creating payment for bookingId={} amount={}", request.referenceId(), request.amount());
 
-        bankAdapter.createTransaction(request);
+//        bankAdapter.createTransaction(request);
         paymentService.createPayment(request);
 
         return ResponseEntity.ok("Transaction created successfully in JBank");

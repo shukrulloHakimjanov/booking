@@ -14,10 +14,12 @@ public interface AmenityMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target = "isActive",ignore = true)
     Amenities fromDto(AmenityRequest dto);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target = "active",ignore = true)
     void update(@MappingTarget Amenities ent, AmenityRequest request);
 }

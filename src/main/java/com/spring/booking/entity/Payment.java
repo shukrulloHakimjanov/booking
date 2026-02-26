@@ -10,6 +10,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -25,10 +26,7 @@ public class Payment extends BaseEntity {
     Long id;
 
     @Column(name = "booking_id", nullable = false)
-    private Long bookingId;
-
-    @Column(name = "booking_uuid")
-    private String bookingUuid;
+    private UUID bookingId;
 
     @Column(precision = 10, scale = 2, nullable = false)
     private BigDecimal amount;
@@ -42,7 +40,7 @@ public class Payment extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(length = 20, nullable = false)
-    private PaymentStatus status = PaymentStatus.PENDING;
+    private PaymentStatus status;
 
     @Column(name = "transaction_id", unique = true)
     private String transactionId;

@@ -13,6 +13,9 @@ public interface RoomTypeMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target = "isActive", ignore = true)
+    @Mapping(target = "hotel", ignore = true)
+    @Mapping(target = "amenities", ignore = true)
     RoomTypes toEntity(RoomTypeRequest dto);
 
     RoomTypeResponse toResponse(RoomTypes roomTypes);
@@ -20,6 +23,9 @@ public interface RoomTypeMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target = "active", ignore = true)
+    @Mapping(target = "hotel", ignore = true)
+    @Mapping(target = "amenities", ignore = true)
     void update(@MappingTarget RoomTypes ent, RoomTypeRequest request);
 
 }

@@ -14,7 +14,6 @@ import java.time.LocalDate;
 public class BookingEmailDTO {
 
     private String email;
-    private String bookingUuid;
     private String customerName;
     private String bookingId;
     private String hotelName;

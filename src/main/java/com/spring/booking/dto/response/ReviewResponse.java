@@ -1,12 +1,12 @@
 package com.spring.booking.dto.response;
 
+import java.util.UUID;
+
 public record ReviewResponse(
         Long id,
-        Long bookingId,
+        UUID bookingId,
         Long userId,
-        String userName,
         Long hotelId,
-        String hotelName,
         Integer rating,
         Integer serviceRating,
         String comment

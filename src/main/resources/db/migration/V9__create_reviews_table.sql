@@ -1,6 +1,6 @@
 CREATE TABLE reviews (
     id BIGSERIAL PRIMARY KEY,
-    booking_id BIGINT NOT NULL,
+    booking_id UUID NOT NULL,
     user_id BIGINT NOT NULL,
     hotel_id BIGINT NOT NULL,
     rating INT NOT NULL,

@@ -15,10 +15,10 @@ import java.util.List;
 public class UserAuth implements UserDetails {
     private Long id;
     private String email;
-    private String firstname;
-    private String lastname;
-    private String password;
-    private String phoneNumber;
+    private String firstName;
+    private String lastName;
+    private String passwordHash;
+    private String phone;
     private Role role;
 
 
@@ -29,7 +29,7 @@ public class UserAuth implements UserDetails {
 
     @Override
     public String getPassword() {
-        return password;
+        return passwordHash;
     }
 
     @Override

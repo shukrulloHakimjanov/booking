@@ -11,7 +11,7 @@ public record HotelResponse(
         String name,
         String description,
         String address,
-        BigDecimal rating,
+        Float rating,
         LocalTime checkInTime,
         LocalTime checkOutTime,
         List<AttachmentDto> attachments,

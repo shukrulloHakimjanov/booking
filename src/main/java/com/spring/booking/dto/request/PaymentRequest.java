@@ -4,10 +4,10 @@ package com.spring.booking.dto.request;
 import com.spring.booking.constant.enums.PaymentMethod;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 public record PaymentRequest(
-        String referenceId,
-        Long bookingId,
+        UUID referenceId,
         BigDecimal amount,
         String currency,
         String senderName,

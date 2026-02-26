@@ -21,7 +21,6 @@ public class BookingEventPublisher {
 
         BookingEmailDTO dto = BookingEmailDTO.builder()
                 .bookingId(String.valueOf(response.id()))
-                .bookingUuid(response.bookingUuid())
                 .email(response.user().email())
                 .customerName(response.user().firstName())
                 .hotelName(response.hotel().name())

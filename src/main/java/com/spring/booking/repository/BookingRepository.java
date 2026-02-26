@@ -10,8 +10,9 @@ import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
-public interface BookingRepository extends JpaRepository<Bookings, Long> {
+public interface BookingRepository extends JpaRepository<Bookings, UUID> {
 
     @Query("SELECT b FROM Bookings b WHERE b.isActive = true AND " + "(LOWER(b.user.firstName) LIKE LOWER(CONCAT('%', :searchText, '%')) " + "OR LOWER(b.user.lastName) LIKE LOWER(CONCAT('%', :searchText, '%')) " + "OR LOWER(b.hotel.name) LIKE LOWER(CONCAT('%', :searchText, '%')) " + "OR LOWER(b.room.roomNumber) LIKE LOWER(CONCAT('%', :searchText, '%')) " + "OR CAST(b.status AS string) LIKE LOWER(CONCAT('%', :searchText, '%')))")
     Page<Bookings> findAllWithSearch(@Param("searchText") String searchText, Pageable pageable);

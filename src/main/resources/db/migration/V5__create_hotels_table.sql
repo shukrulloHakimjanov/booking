@@ -6,7 +6,7 @@ CREATE TABLE hotels
     description    TEXT,
     city_id        BIGINT        NOT NULL,
     address        TEXT,
-    rating         DECIMAL(2, 1) NOT NULL DEFAULT 0.0,
+    rating         FLOAT NOT NULL DEFAULT 0.0,
     check_in_time  TIME          NOT NULL,
     check_out_time TIME          NOT NULL,
     created_at     TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,

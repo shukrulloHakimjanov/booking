@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -31,7 +32,7 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public void createPayment(PaymentRequest request) {
         Payment payment = Payment.builder()
-                .bookingId(request.bookingId())
+                .bookingId(request.referenceId())
                 .amount(request.amount())
                 .currency(request.currency())
                 .paymentMethod(request.paymentMethod())

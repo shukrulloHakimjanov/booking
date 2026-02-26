@@ -113,15 +113,5 @@ INSERT INTO rooms (room_type_id, room_number, floor, accommodation_type, status,
 (9, '2', 1, 'BED_AND_BREAKFAST', 'AVAILABLE', CURRENT_TIMESTAMP, true),
 (10, '3', 2, 'BED_AND_BREAKFAST', 'AVAILABLE', CURRENT_TIMESTAMP, true);
 
-INSERT INTO booking (user_id, hotel_id, room_id, check_in_date, check_out_date, num_guests, total_price, currency, status, special_requests, created_at, is_active) VALUES
-(4, 1, 3, '2026-02-10', '2026-02-13', 2, 450.00, 'USD', 'CONFIRMED', 'Late check-in requested', CURRENT_TIMESTAMP, true),
-(5, 2, 9, '2026-02-15', '2026-02-20', 2, 1200.00, 'USD', 'CONFIRMED', 'Honeymoon package', CURRENT_TIMESTAMP, true),
-(4, 1, 1, '2026-01-20', '2026-01-23', 1, 300.00, 'USD', 'COMPLETED', NULL, CURRENT_TIMESTAMP, true),
-(5, 3, 13, '2026-02-08', '2026-02-09', 1, 120.00, 'USD', 'CONFIRMED', 'Business trip', CURRENT_TIMESTAMP, true),
-(4, 4, 17, '2026-03-01', '2026-03-05', 2, 800.00, 'USD', 'PENDING', 'Anniversary trip', CURRENT_TIMESTAMP, true);
-
-INSERT INTO reviews (booking_id, user_id, hotel_id, rating, service_rating, comment, created_at, is_active) VALUES
-(3, 4, 1, 5, 5, 'Excellent hotel! The staff was very friendly and the room was spotless. Great location in Manhattan.', CURRENT_TIMESTAMP, true),
-(2, 5, 2, 4, 4, 'Beautiful resort with amazing beach access. The only downside was the distance from the airport.', CURRENT_TIMESTAMP, true);
 
 

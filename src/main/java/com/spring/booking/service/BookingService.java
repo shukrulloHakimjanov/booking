@@ -6,21 +6,23 @@ import com.spring.booking.dto.request.BookingRequest;
 import com.spring.booking.dto.response.BookingResponse;
 import org.springframework.data.domain.Page;
 
+import java.util.UUID;
+
 public interface BookingService {
 
     BookingResponse create(BookingRequest request);
 
-    BookingResponse get(Long id);
+    BookingResponse get(UUID id);
 
-    BookingResponse update(Long id, BookingRequest request);
+    BookingResponse update(UUID id, BookingRequest request);
 
     Page<BookingResponse> getAll(PageRequestDto pageRequestDtoParams);
 
-    BookingResponse updateStatus(Long id, BookingStatus newStatus);
+    BookingResponse updateStatus(UUID id, BookingStatus newStatus);
 
-    void updateStatusAndPaymentId(Long id, BookingStatus status, String paymentId);
+    void updateStatusAndPaymentId(UUID id, BookingStatus status, String paymentId);
 
-    void delete(Long id);
+    void delete(UUID id);
 
     Page<BookingResponse> getByUser(Long userId, PageRequestDto pageRequestDto);
 

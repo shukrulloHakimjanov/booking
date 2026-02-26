@@ -41,6 +41,6 @@ public class User extends BaseEntity {
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
-    UserStatus status = UserStatus.PENDING_VERIFICATION;
+    UserStatus status;
 
 }

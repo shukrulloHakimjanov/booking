@@ -7,7 +7,9 @@ import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -47,8 +49,8 @@ public class Hotels extends BaseEntity {
     @Column(name = "address", columnDefinition = "text")
     String address;
 
-    @Column(name = "rating", precision = 2, scale = 1, nullable = false)
-    BigDecimal rating = BigDecimal.ZERO;
+    @Column(name = "rating", nullable = false)
+    Float rating;
 
     @Column(name = "check_in_time", nullable = false)
     LocalTime checkInTime;
@@ -60,11 +62,11 @@ public class Hotels extends BaseEntity {
     @JoinTable(name = "hotel_attachment",
             joinColumns = @JoinColumn(name = "hotel_id"),
             inverseJoinColumns = @JoinColumn(name = "attachment_id"))
-    Set<Attachments> attachments = new HashSet<>();
+    Set<Attachments> attachments;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "hotel_amenities",
             joinColumns = @JoinColumn(name = "hotel_id"),
             inverseJoinColumns = @JoinColumn(name = "amenities_id"))
-    Set<Amenities> amenities = new HashSet<>();
+    Set<Amenities> amenities;
 }

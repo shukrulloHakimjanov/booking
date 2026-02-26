@@ -1,2 +1,0 @@
-ALTER TABLE booking
-    ALTER COLUMN status TYPE VARCHAR(40);

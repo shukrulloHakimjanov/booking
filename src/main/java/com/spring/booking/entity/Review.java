@@ -5,6 +5,8 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 @Entity
@@ -20,7 +22,7 @@ public class Review extends BaseEntity {
     Long id;
 
     @Column(name = "booking_id", nullable = false)
-    Long bookingId;
+    UUID bookingId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "booking_id", nullable = false, insertable = false, updatable = false)
