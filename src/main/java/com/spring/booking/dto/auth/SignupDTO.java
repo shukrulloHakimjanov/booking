@@ -16,7 +16,7 @@ public class SignupDTO {
     @NotNull
     private String firstname;
     private String lastname;
-    @Size(min =8)
+    @Size(min = 8)
     @NotNull
     private String password;
     @NotNull

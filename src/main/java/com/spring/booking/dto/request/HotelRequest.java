@@ -15,4 +15,5 @@ public record HotelRequest(
         LocalTime checkOutTime,
         Set<Long> attachmentIds,
         Set<Long> amenitiesIds
-) {}
+) {
+}

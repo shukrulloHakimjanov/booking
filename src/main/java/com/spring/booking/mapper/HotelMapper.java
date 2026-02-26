@@ -15,8 +15,6 @@ public interface HotelMapper {
     @Mapping(target = "updatedAt", ignore = true)
     Hotels toEntity(HotelRequest dto);
 
-
-
     HotelResponse toResponse(Hotels hotel);
 
     @Mapping(target = "id", ignore = true)

@@ -9,7 +9,6 @@ import java.util.UUID;
 @Setter
 @Getter
 public class BankTransactionRequest {
-
     private UUID referenceId;
     private String type;
     private BigDecimal amount;

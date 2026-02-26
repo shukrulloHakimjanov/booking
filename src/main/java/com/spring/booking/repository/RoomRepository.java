@@ -1,7 +1,7 @@
 package com.spring.booking.repository;
 
-import com.spring.booking.entity.Rooms;
 import com.spring.booking.constant.enums.Status;
+import com.spring.booking.entity.Rooms;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,8 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface RoomRepository extends JpaRepository<Rooms, Long> {
-
-
 
     @Query("SELECT r FROM Rooms r " +
             "LEFT JOIN r.roomType rt " +

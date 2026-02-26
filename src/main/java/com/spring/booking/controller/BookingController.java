@@ -6,7 +6,6 @@ import com.spring.booking.dto.request.BookingRequest;
 import com.spring.booking.dto.response.BookingResponse;
 import com.spring.booking.service.BookingService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AccessLevel;
@@ -15,8 +14,6 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
 
 @Slf4j
 @RestController
@@ -53,7 +50,7 @@ public class BookingController {
 
     @Operation(summary = "Update booking status", description = "Updates only the status of a booking and sends Kafka event")
     @PatchMapping("/{id}/status")
-    public BookingResponse updateStatus(@PathVariable Long id,@RequestParam BookingStatus status) {
+    public BookingResponse updateStatus(@PathVariable Long id, @RequestParam BookingStatus status) {
         log.info("Updating booking status. id={}, newStatus={}", id, status);
         return bookingService.updateStatus(id, status);
     }
@@ -67,7 +64,7 @@ public class BookingController {
 
     @Operation(summary = "Delete booking", description = "Deletes a booking by ID")
     @DeleteMapping("/{id}")
-    public void delete( @PathVariable Long id) {
+    public void delete(@PathVariable Long id) {
         log.info("Deleting booking with id: {}", id);
         bookingService.delete(id);
     }

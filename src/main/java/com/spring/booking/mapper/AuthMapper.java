@@ -2,7 +2,6 @@ package com.spring.booking.mapper;
 
 import com.spring.booking.dto.auth.SignupDTO;
 import com.spring.booking.dto.auth.UserAuth;
-import com.spring.booking.dto.response.UserResponse;
 import com.spring.booking.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

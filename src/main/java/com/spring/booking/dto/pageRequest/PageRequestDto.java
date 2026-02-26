@@ -14,17 +14,17 @@ import org.springframework.data.domain.Sort;
 public class PageRequestDto {
 
     private String searchText = "";
-    
+
     @Min(value = 1, message = "INVALID_PAGE_NUMBER")
     private int page = 1;
-    
+
     @Min(value = 1, message = "Filter size must be at least one!")
     @Max(value = 20, message = "Filter size must be at most 20!")
     private int size = 16;
 
     private Sort.Direction sort = Sort.Direction.DESC;
-    
-    private String sortBy = "id";  // Default sort field
+
+    private String sortBy = "id";
 
     @JsonIgnore
     public Pageable getPageable() {

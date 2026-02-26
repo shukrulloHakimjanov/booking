@@ -16,15 +16,11 @@ public class BookingEmailDTO {
     private String email;
     private String bookingUuid;
     private String customerName;
-
     private String bookingId;
     private String hotelName;
-
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
-
     private Integer guests;
-
     private BigDecimal amount;
     private String key;
     private String correlationId;

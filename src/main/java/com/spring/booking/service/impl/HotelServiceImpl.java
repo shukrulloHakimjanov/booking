@@ -8,10 +8,10 @@ import com.spring.booking.entity.Hotels;
 import com.spring.booking.exception.exceptions404.CitiesNotFoundException;
 import com.spring.booking.exception.exceptions404.HotelNotFoundException;
 import com.spring.booking.mapper.HotelMapper;
-import com.spring.booking.repository.HotelRepository;
 import com.spring.booking.repository.AmenityRepository;
 import com.spring.booking.repository.AttachmentRepository;
 import com.spring.booking.repository.CitiesRepository;
+import com.spring.booking.repository.HotelRepository;
 import com.spring.booking.service.HotelService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +31,6 @@ import java.util.HashSet;
 public class HotelServiceImpl implements HotelService {
 
     HotelRepository hotelRepository;
-
     AttachmentRepository attachmentRepository;
     AmenityRepository amenityRepository;
     HotelMapper hotelMapper;

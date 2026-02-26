@@ -37,20 +37,22 @@ public class CityServiceImpl implements CityService {
     @Override
     public CityRepsonse get(Long id) {
         City city = citiesRepository.findById(id)
-                .orElseThrow(() -> new CitiesNotFoundException("City not found with id: " + id.toString()));
+                .orElseThrow(() -> new CitiesNotFoundException("City not found with id: "));
         return citiesMapper.toDto(city);
     }
+
     @Override
     @Transactional
     public CityRepsonse update(Long id, CityRequest request) {
         City city = citiesRepository.findById(id)
-                .orElseThrow(() -> new CitiesNotFoundException("User not found with id: " + id.toString()));
+                .orElseThrow(() -> new CitiesNotFoundException("User not found with id: "));
 
         citiesMapper.update(city, request);
 
         return citiesMapper.toDto(citiesRepository.save(city));
 
     }
+
     @Override
     public Page<CityRepsonse> getAll(PageRequestDto pageRequestDtoParams) {
         Page<City> all = citiesRepository.findAllWithSearch(pageRequestDtoParams.getSearchText(), pageRequestDtoParams.getPageable());
@@ -61,7 +63,7 @@ public class CityServiceImpl implements CityService {
     @Transactional
     public void delete(Long id) {
         if (!citiesRepository.existsById(id)) {
-            throw new CitiesNotFoundException("City not found with id: " + id.toString());
+            throw new CitiesNotFoundException("City not found with id: " + id);
         }
         citiesRepository.deleteById(id);
     }

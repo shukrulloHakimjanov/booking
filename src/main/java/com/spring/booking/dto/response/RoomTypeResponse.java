@@ -11,4 +11,5 @@ public record RoomTypeResponse(
         Integer maxGuests,
         String bedConfiguration,
         Set<AmenityResponse> amenities
-) {}
+) {
+}

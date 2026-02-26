@@ -13,4 +13,5 @@ public record PaymentRequest(
         String senderName,
         String senderToken,
         PaymentMethod paymentMethod
-) {}
+) {
+}

@@ -78,7 +78,7 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<RoomResponse> getAllWithSearch( PageRequestDto pageRequestDtoParams) {
+    public Page<RoomResponse> getAllWithSearch(PageRequestDto pageRequestDtoParams) {
         log.info("Searching rooms with text: '{}', page: {}, size: {}", pageRequestDtoParams.getSearchText(), pageRequestDtoParams.getPage(), pageRequestDtoParams.getSize());
         Page<Rooms> page = roomRepository.findAllWithSearch(pageRequestDtoParams.getSearchText(), pageRequestDtoParams.getPageable());
         return page.map(roomMapper::toResponse);

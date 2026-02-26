@@ -24,24 +24,24 @@ public class Payment extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(name = "booking_id",nullable = false)
+    @Column(name = "booking_id", nullable = false)
     private Long bookingId;
 
     @Column(name = "booking_uuid")
-    private  String bookingUuid;
+    private String bookingUuid;
 
-    @Column(precision = 10, scale = 2,nullable = false)
+    @Column(precision = 10, scale = 2, nullable = false)
     private BigDecimal amount;
 
-    @Column(length = 3,nullable = false)
+    @Column(length = 3, nullable = false)
     private String currency;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "payment_method", length = 30,nullable = false)
+    @Column(name = "payment_method", length = 30, nullable = false)
     private PaymentMethod paymentMethod;
 
     @Enumerated(EnumType.STRING)
-    @Column(length = 20,nullable = false)
+    @Column(length = 20, nullable = false)
     private PaymentStatus status = PaymentStatus.PENDING;
 
     @Column(name = "transaction_id", unique = true)

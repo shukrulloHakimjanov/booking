@@ -50,8 +50,8 @@ spring:
     schemas: public
     locations: classpath:db/migration
     table: flyway_schema_history
-    #Kafka confugirations
 
+  #Kafka confugirations
   kafka:
     bootstrap-servers: localhost:9092
     group-id: test_group

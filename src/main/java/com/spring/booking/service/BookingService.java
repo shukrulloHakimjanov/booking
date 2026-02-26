@@ -6,8 +6,6 @@ import com.spring.booking.dto.request.BookingRequest;
 import com.spring.booking.dto.response.BookingResponse;
 import org.springframework.data.domain.Page;
 
-import java.time.LocalDate;
-
 public interface BookingService {
 
     BookingResponse create(BookingRequest request);

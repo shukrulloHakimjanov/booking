@@ -34,7 +34,7 @@ public class PaymentController {
     public ResponseEntity<String> createPaymentViaJBank(@RequestBody PaymentRequest request) {
         log.info("Creating payment for bookingId={} amount={}", request.bookingId(), request.amount());
 
-//        bankAdapter.createTransaction(request);
+        bankAdapter.createTransaction(request);
         paymentService.createPayment(request);
 
         return ResponseEntity.ok("Transaction created successfully in JBank");

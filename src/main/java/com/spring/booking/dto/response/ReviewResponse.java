@@ -10,4 +10,5 @@ public record ReviewResponse(
         Integer rating,
         Integer serviceRating,
         String comment
-) {}
+) {
+}

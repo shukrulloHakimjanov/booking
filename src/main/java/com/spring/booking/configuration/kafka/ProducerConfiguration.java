@@ -22,7 +22,7 @@ import java.util.UUID;
 @Configuration
 @RequiredArgsConstructor
 @FieldDefaults(level = lombok.AccessLevel.PRIVATE, makeFinal = true)
-@EnableConfigurationProperties(KafkaProps.class)  // <-- ensures KafkaProps bean is available
+@EnableConfigurationProperties(KafkaProps.class)
 public class ProducerConfiguration {
 
     KafkaProps kafkaProps;

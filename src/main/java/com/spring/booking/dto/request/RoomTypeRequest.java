@@ -30,4 +30,5 @@ public record RoomTypeRequest(
                 @NotNull(message = "Amenity ID cannot be null")
                         Long
                 > amenitiesIds
-) {}
+) {
+}

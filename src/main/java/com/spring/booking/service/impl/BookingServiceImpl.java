@@ -1,6 +1,5 @@
 package com.spring.booking.service.impl;
 
-
 import com.spring.booking.component.publisher.BookingEventPublisher;
 import com.spring.booking.constant.enums.BookingStatus;
 import com.spring.booking.dto.pageRequest.PageRequestDto;
@@ -139,7 +138,7 @@ public class BookingServiceImpl implements BookingService {
             return;
         }
 
-        Bookings bookings=bookingRepository.save(booking);
+        Bookings bookings = bookingRepository.save(booking);
         BookingResponse response = bookingMapper.toResponse(bookings);
         bookingEventPublisher.sendBookingEvent(response);
 

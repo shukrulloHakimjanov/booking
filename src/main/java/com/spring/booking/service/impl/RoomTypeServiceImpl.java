@@ -79,7 +79,7 @@ public class RoomTypeServiceImpl implements RoomTypeService {
 
     @Override
     public Page<RoomTypeResponse> getAll(PageRequestDto pageRequestDtoParams) {
-        Page<RoomTypes> page = roomTypeRepository.findAllWithSearch( pageRequestDtoParams.getSearchText(), pageRequestDtoParams.getPageable());
+        Page<RoomTypes> page = roomTypeRepository.findAllWithSearch(pageRequestDtoParams.getSearchText(), pageRequestDtoParams.getPageable());
         return page.map(roomTypeMapper::toResponse);
     }
 

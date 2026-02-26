@@ -1,6 +1,9 @@
 package com.spring.booking.dto.request;
 
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 public record ReviewRequest(
 
@@ -27,4 +30,5 @@ public record ReviewRequest(
 
         @Size(max = 1000, message = "Comment must not exceed 1000 characters")
         String comment
-) {}
+) {
+}

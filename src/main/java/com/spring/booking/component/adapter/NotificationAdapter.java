@@ -1,11 +1,11 @@
 package com.spring.booking.component.adapter;
 
-import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
+
 @Slf4j
 @Component
 @FieldDefaults(level = lombok.AccessLevel.PRIVATE, makeFinal = true)

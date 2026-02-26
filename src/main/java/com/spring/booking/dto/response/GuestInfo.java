@@ -6,4 +6,5 @@ public record GuestInfo(
         String passportNumber,
         String email,
         String phone
-) {}
+) {
+}

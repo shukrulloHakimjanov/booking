@@ -22,9 +22,6 @@ public interface BookingRepository extends JpaRepository<Bookings, Long> {
     @Query("SELECT b FROM Bookings b WHERE b.isActive = true AND b.hotelId = :hotelId")
     Page<Bookings> findByHotelId(@Param("hotelId") Long hotelId, Pageable pageable);
 
-    @Query("SELECT b FROM Bookings b WHERE b.isActive = true AND b.roomId = :roomId")
-    Page<Bookings> findByRoomId(@Param("roomId") Long roomId, Pageable pageable);
-
     @Query("SELECT b FROM Bookings b WHERE b.isActive = true AND b.status = :status")
     Page<Bookings> findByStatus(@Param("status") BookingStatus status, Pageable pageable);
 

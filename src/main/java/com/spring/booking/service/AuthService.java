@@ -14,6 +14,5 @@ public interface AuthService {
 
     LoginResponseDTO login(LoginDTO request);
 
-
     boolean existsByEmail(String email);
 }

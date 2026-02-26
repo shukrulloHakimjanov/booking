@@ -24,7 +24,7 @@ public interface HotelRepository extends JpaRepository<Hotels, Long> {
             
             AND (:minRating IS NULL OR h.rating >= :minRating)    
             AND (:amenityId IS NULL OR a.id = :amenityId)     
-                               
+            
             AND (
                 :searchText IS NULL
                 OR :searchText = ''

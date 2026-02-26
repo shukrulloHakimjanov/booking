@@ -1,7 +1,7 @@
 package com.spring.booking.dto;
 
-import lombok.Builder;
 import com.spring.booking.constant.enums.ErrorType;
+import lombok.Builder;
 
 import java.util.List;
 
@@ -10,4 +10,5 @@ public record ErrorDto(
         int code,
         String message,
         ErrorType type,
-        List<String> validationErrors) {}
+        List<String> validationErrors) {
+}
