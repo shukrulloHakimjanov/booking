@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 public class HotelFilterDto extends PageRequestDto {
     private Long cityId;
     private Long ownerId;
-    private BigDecimal minRating;
+    private Float minRating;
     private Long amenityId;
     private Boolean isActive = true;
 }

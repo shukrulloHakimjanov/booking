@@ -6,8 +6,7 @@ import com.spring.booking.dto.request.RoomRequest;
 import com.spring.booking.dto.response.RoomResponse;
 import com.spring.booking.entity.RoomTypes;
 import com.spring.booking.entity.Rooms;
-import com.spring.booking.exception.exceptions404.RoomNotFoundException;
-import com.spring.booking.exception.exceptions404.RoomTypeNotFoundException;
+import com.spring.booking.exception.NotFoundException;
 import com.spring.booking.mapper.RoomMapper;
 import com.spring.booking.repository.RoomRepository;
 import com.spring.booking.repository.RoomTypeRepository;
@@ -35,7 +34,7 @@ public class RoomServiceImpl implements RoomService {
     public RoomResponse create(RoomRequest request) {
         log.info("Creating new room with room type id: {}", request.roomTypeId());
 
-        RoomTypes roomType = roomTypeRepository.findById(request.roomTypeId()).orElseThrow(() -> new RoomTypeNotFoundException("Room type not found with id: " + request.roomTypeId()));
+        RoomTypes roomType = roomTypeRepository.findById(request.roomTypeId()).orElseThrow(() -> new NotFoundException("Room type not found with id: " + request.roomTypeId()));
 
         Rooms room = roomMapper.toEntity(request);
         room.setRoomType(roomType);
@@ -51,12 +50,12 @@ public class RoomServiceImpl implements RoomService {
     public RoomResponse update(Long id, RoomRequest request) {
         log.info("Updating room with id: {}", id);
 
-        Rooms room = roomRepository.findById(id).orElseThrow(() -> new RoomNotFoundException("Room not found with id: " + id));
+        Rooms room = roomRepository.findById(id).orElseThrow(() -> new NotFoundException("Room not found with id: " + id));
 
         roomMapper.update(room, request);
 
         if (request.roomTypeId() != null) {
-            RoomTypes roomType = roomTypeRepository.findById(request.roomTypeId()).orElseThrow(() -> new RoomTypeNotFoundException("Room type not found with id: " + request.roomTypeId()));
+            RoomTypes roomType = roomTypeRepository.findById(request.roomTypeId()).orElseThrow(() -> new NotFoundException("Room type not found with id: " + request.roomTypeId()));
             room.setRoomType(roomType);
         }
 
@@ -71,7 +70,7 @@ public class RoomServiceImpl implements RoomService {
     public RoomResponse get(Long id) {
         log.info("Fetching room with id: {}", id);
 
-        Rooms room = roomRepository.findById(id).orElseThrow(() -> new RoomNotFoundException("Room not found with id: " + id));
+        Rooms room = roomRepository.findById(id).orElseThrow(() -> new NotFoundException("Room not found with id: " + id));
 
         return roomMapper.toResponse(room);
     }
@@ -90,7 +89,7 @@ public class RoomServiceImpl implements RoomService {
         log.info("Fetching rooms by room type id: {}", roomTypeId);
 
         if (!roomTypeRepository.existsById(roomTypeId)) {
-            throw new RoomTypeNotFoundException("Room type not found with id: " + roomTypeId);
+            throw new NotFoundException("Room type not found with id: " + roomTypeId);
         }
 
         Page<Rooms> page = roomRepository.findByRoomTypeId(roomTypeId, pageRequestDtoParams.getPageable());
@@ -139,11 +138,9 @@ public class RoomServiceImpl implements RoomService {
     public void deleteById(Long id) {
         log.info("Deleting room with id: {}", id);
 
-        Rooms room = roomRepository.findById(id).orElseThrow(() -> new RoomNotFoundException("Room not found with id: " + id));
-
-        room.setActive(false);
-        roomRepository.save(room);
-
+        Rooms room = roomRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Room not found with id: " + id));
+        roomRepository.delete(room);
         log.info("Room  deleted successfully with id: {}", id);
     }
 
@@ -152,7 +149,7 @@ public class RoomServiceImpl implements RoomService {
     public RoomResponse updateStatus(Long id, Status status) {
         log.info("Updating room status with id: {} to status: {}", id, status);
 
-        Rooms room = roomRepository.findById(id).orElseThrow(() -> new RoomNotFoundException("Room not found with id: " + id));
+        Rooms room = roomRepository.findById(id).orElseThrow(() -> new NotFoundException("Room not found with id: " + id));
         room.setStatus(status);
         Rooms updated = roomRepository.save(room);
 

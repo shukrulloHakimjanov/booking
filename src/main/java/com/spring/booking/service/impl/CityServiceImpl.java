@@ -4,7 +4,7 @@ import com.spring.booking.dto.pageRequest.PageRequestDto;
 import com.spring.booking.dto.request.CityRequest;
 import com.spring.booking.dto.response.CityRepsonse;
 import com.spring.booking.entity.City;
-import com.spring.booking.exception.exceptions404.CitiesNotFoundException;
+import com.spring.booking.exception.NotFoundException;
 import com.spring.booking.mapper.CitiesMapper;
 import com.spring.booking.repository.CitiesRepository;
 import com.spring.booking.service.CityService;
@@ -37,7 +37,7 @@ public class CityServiceImpl implements CityService {
     @Override
     public CityRepsonse get(Long id) {
         City city = citiesRepository.findById(id)
-                .orElseThrow(() -> new CitiesNotFoundException("City not found with id: "));
+                .orElseThrow(() -> new NotFoundException("City not found with id: "));
         return citiesMapper.toDto(city);
     }
 
@@ -45,7 +45,7 @@ public class CityServiceImpl implements CityService {
     @Transactional
     public CityRepsonse update(Long id, CityRequest request) {
         City city = citiesRepository.findById(id)
-                .orElseThrow(() -> new CitiesNotFoundException("User not found with id: "));
+                .orElseThrow(() -> new NotFoundException("User not found with id: "));
 
         citiesMapper.update(city, request);
 
@@ -63,7 +63,7 @@ public class CityServiceImpl implements CityService {
     @Transactional
     public void delete(Long id) {
         if (!citiesRepository.existsById(id)) {
-            throw new CitiesNotFoundException("City not found with id: " + id);
+            throw new NotFoundException("City not found with id: " + id);
         }
         citiesRepository.deleteById(id);
     }

@@ -3,6 +3,7 @@ package com.spring.booking.service.impl;
 import com.spring.booking.configuration.minio.MinioService;
 import com.spring.booking.dto.response.AttachmentDto;
 import com.spring.booking.entity.Attachments;
+import com.spring.booking.exception.NotFoundException;
 import com.spring.booking.mapper.AttachmentMapper;
 import com.spring.booking.repository.AttachmentRepository;
 import com.spring.booking.service.AttachmentService;
@@ -55,7 +56,7 @@ public class AttachmentServiceImpl implements AttachmentService {
     public void delete(String key) {
 
         Attachments attachment = attachmentRepository.findByKey(key)
-                .orElseThrow(() -> new RuntimeException("Attachment not found"));
+                .orElseThrow(() -> new NotFoundException("Attachment not found"));
 
         minioService.delete(key);
         attachmentRepository.delete(attachment);

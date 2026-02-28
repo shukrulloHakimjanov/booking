@@ -5,8 +5,7 @@ import com.spring.booking.dto.request.HotelRequest;
 import com.spring.booking.dto.response.HotelResponse;
 import com.spring.booking.entity.City;
 import com.spring.booking.entity.Hotels;
-import com.spring.booking.exception.exceptions404.CitiesNotFoundException;
-import com.spring.booking.exception.exceptions404.HotelNotFoundException;
+import com.spring.booking.exception.NotFoundException;
 import com.spring.booking.mapper.HotelMapper;
 import com.spring.booking.repository.AmenityRepository;
 import com.spring.booking.repository.AttachmentRepository;
@@ -21,7 +20,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 
 @Slf4j
@@ -41,7 +39,7 @@ public class HotelServiceImpl implements HotelService {
     @Transactional
     public HotelResponse create(HotelRequest request) {
         Hotels hotel = hotelMapper.toEntity(request);
-        City city = citiesRepository.findById(request.cityId()).orElseThrow(() -> new CitiesNotFoundException("City not found with id: " + request.cityId()));
+        City city = citiesRepository.findById(request.cityId()).orElseThrow(() -> new NotFoundException("City not found with id: " + request.cityId()));
 
         hotel.setCity(city);
 
@@ -54,7 +52,7 @@ public class HotelServiceImpl implements HotelService {
     @Override
     @Transactional
     public HotelResponse update(Long id, HotelRequest request) {
-        Hotels hotel = hotelRepository.findById(id).orElseThrow(() -> new HotelNotFoundException("Hotel not found with id: " + id));
+        Hotels hotel = hotelRepository.findById(id).orElseThrow(() -> new NotFoundException("Hotel not found with id: " + id));
 
         hotelMapper.update(hotel, request);
 
@@ -79,7 +77,7 @@ public class HotelServiceImpl implements HotelService {
     @Transactional
     public void delete(Long id) {
         if (!hotelRepository.existsById(id)) {
-            throw new HotelNotFoundException("Hotel not found with id: " + id);
+            throw new NotFoundException("Hotel not found with id: " + id);
         }
         hotelRepository.deleteById(id);
     }
@@ -93,7 +91,7 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public HotelResponse get(Long id) {
-        Hotels hotel = hotelRepository.findById(id).orElseThrow(() -> new HotelNotFoundException("Hotel not found with id: " + id));
+        Hotels hotel = hotelRepository.findById(id).orElseThrow(() -> new NotFoundException("Hotel not found with id: " + id));
         return hotelMapper.toResponse(hotel);
     }
 

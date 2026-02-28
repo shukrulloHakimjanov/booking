@@ -4,8 +4,8 @@ import com.spring.booking.dto.pageRequest.PageRequestDto;
 import com.spring.booking.dto.request.AmenityRequest;
 import com.spring.booking.dto.response.AmenityResponse;
 import com.spring.booking.entity.Amenities;
-import com.spring.booking.exception.exception409.AmenityAlreadyExistsException;
-import com.spring.booking.exception.exceptions404.AmenityNotFoundException;
+import com.spring.booking.exception.AlreadyExistsException;
+import com.spring.booking.exception.NotFoundException;
 import com.spring.booking.mapper.AmenityMapper;
 import com.spring.booking.repository.AmenityRepository;
 import com.spring.booking.service.AmenityService;
@@ -32,7 +32,6 @@ public class AmenityServiceImpl implements AmenityService {
     @Override
     @Transactional
     public AmenityResponse create(AmenityRequest request) {
-        validate(request.name());
         Amenities amenity = amenityMapper.fromDto(request);
         Amenities saved = amenityRepository.save(amenity);
         return amenityMapper.toDto(saved);
@@ -42,7 +41,7 @@ public class AmenityServiceImpl implements AmenityService {
     public AmenityResponse get(Long id) {
         Amenities amenity = amenityRepository.findById(id)
                 .orElseThrow(() ->
-                        new AmenityNotFoundException("Amenity not found with id: " + id)
+                        new NotFoundException("Amenity not found with id: " + id)
                 );
         return amenityMapper.toDto(amenity);
     }
@@ -52,11 +51,11 @@ public class AmenityServiceImpl implements AmenityService {
     public AmenityResponse update(Long id, AmenityRequest request) {
         Amenities amenity = amenityRepository.findById(id)
                 .orElseThrow(() ->
-                        new AmenityNotFoundException("Amenity not found with id: " + id)
+                        new NotFoundException("Amenity not found with id: " + id)
                 );
 
         if (Objects.equals(request.name(), amenity.getName())) {
-            throw new AmenityAlreadyExistsException("Amenity already exists!");
+            throw new AlreadyExistsException("Amenity already exists!");
         }
 
         amenityMapper.update(amenity, request);
@@ -80,17 +79,9 @@ public class AmenityServiceImpl implements AmenityService {
     @Transactional
     public void delete(Long id) {
         if (!amenityRepository.existsById(id)) {
-            throw new AmenityNotFoundException("Amenity not found with id: " + id);
+            throw new NotFoundException("Amenity not found with id: " + id);
         }
         amenityRepository.deleteById(id);
     }
 
-    public void validate(String name) {
-        if (amenityRepository.existsByNameIgnoreCase(name)) {
-            log.warn("Amenity already exists with name: {}", name);
-            throw new AmenityAlreadyExistsException(
-                    "Amenity already exists with name: " + name
-            );
-        }
-    }
 }

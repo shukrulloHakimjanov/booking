@@ -24,7 +24,7 @@ public class BookingExpirationUtility {
     private final BookingMapper bookingMapper;
     private final BookingEventPublisher bookingEventPublisher;
 
-    @Scheduled(fixedRate = 600000)
+    @Scheduled(cron = "0 0 * * * *")
     @Transactional
     public void expireBookings() {
 

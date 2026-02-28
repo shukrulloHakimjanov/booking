@@ -6,8 +6,7 @@ import com.spring.booking.dto.response.RoomTypeResponse;
 import com.spring.booking.entity.Hotels;
 import com.spring.booking.entity.RoomTypes;
 import com.spring.booking.exception.BadRequestException;
-import com.spring.booking.exception.exceptions404.HotelNotFoundException;
-import com.spring.booking.exception.exceptions404.RoomTypeNotFoundException;
+import com.spring.booking.exception.NotFoundException;
 import com.spring.booking.mapper.RoomTypeMapper;
 import com.spring.booking.repository.AmenityRepository;
 import com.spring.booking.repository.HotelRepository;
@@ -21,7 +20,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 
 @Slf4j
@@ -41,7 +39,7 @@ public class RoomTypeServiceImpl implements RoomTypeService {
     public RoomTypeResponse create(RoomTypeRequest request) {
 
         Hotels hotel = hotelRepository.findById(request.hotelId())
-                .orElseThrow(() -> new HotelNotFoundException("Hotel not found with id: " + request.hotelId()));
+                .orElseThrow(() -> new NotFoundException("Hotel not found with id: " + request.hotelId()));
 
         RoomTypes roomType = roomTypeMapper.toEntity(request);
         roomType.setHotel(hotel);
@@ -56,12 +54,12 @@ public class RoomTypeServiceImpl implements RoomTypeService {
     @Transactional
     public RoomTypeResponse update(Long id, RoomTypeRequest request) {
 
-        RoomTypes roomType = roomTypeRepository.findById(id).orElseThrow(() -> new RoomTypeNotFoundException("Room type not found with id: " + id));
+        RoomTypes roomType = roomTypeRepository.findById(id).orElseThrow(() -> new NotFoundException("Room type not found with id: " + id));
 
         roomTypeMapper.update(roomType, request);
 
         if (request.hotelId() != null) {
-            Hotels hotel = hotelRepository.findById(request.hotelId()).orElseThrow(() -> new HotelNotFoundException("Hotel not found with id: " + request.hotelId()));
+            Hotels hotel = hotelRepository.findById(request.hotelId()).orElseThrow(() -> new NotFoundException("Hotel not found with id: " + request.hotelId()));
             roomType.setHotel(hotel);
         }
 
@@ -73,7 +71,7 @@ public class RoomTypeServiceImpl implements RoomTypeService {
 
     @Override
     public RoomTypeResponse get(Long id) {
-        RoomTypes roomType = roomTypeRepository.findById(id).orElseThrow(() -> new RoomTypeNotFoundException("Room type not found with id: " + id));
+        RoomTypes roomType = roomTypeRepository.findById(id).orElseThrow(() -> new NotFoundException("Room type not found with id: " + id));
 
         return roomTypeMapper.toResponse(roomType);
     }
@@ -88,7 +86,7 @@ public class RoomTypeServiceImpl implements RoomTypeService {
     @Transactional
     public void delete(Long id) {
         if (!roomTypeRepository.existsById(id)) {
-            throw new RoomTypeNotFoundException("Room type not found with id: " + id);
+            throw new NotFoundException("Room type not found with id: " + id);
         }
         roomTypeRepository.deleteById(id);
     }
@@ -127,7 +125,7 @@ public class RoomTypeServiceImpl implements RoomTypeService {
 
     private void validateHotelExists(Long hotelId) {
         if (!hotelRepository.existsById(hotelId)) {
-            throw new HotelNotFoundException("Hotel not found with id: " + hotelId);
+            throw new NotFoundException("Hotel not found with id: " + hotelId);
         }
     }
 

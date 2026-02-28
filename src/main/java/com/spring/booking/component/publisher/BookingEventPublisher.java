@@ -7,6 +7,7 @@ import com.spring.booking.exception.BadRequestException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Component
@@ -36,25 +37,30 @@ public class BookingEventPublisher {
         bookingEventProducer.sendMessage(dto);
     }
 
+
     private void validate(BookingResponse response) {
 
-        if (response.user() == null || response.user().email() == null) {
+        if (Objects.isNull(response)) {
+            throw new BadRequestException("BookingResponse is required");
+        }
+
+        if (Objects.isNull(response.user()) || Objects.isNull(response.user().email())) {
             throw new BadRequestException("User email is required");
         }
 
-        if (response.hotel() == null || response.hotel().name() == null) {
+        if (Objects.isNull(response.hotel()) || Objects.isNull(response.hotel().name())) {
             throw new BadRequestException("Hotel name is required");
         }
 
-        if (response.checkInDate() == null || response.checkOutDate() == null) {
+        if (Objects.isNull(response.checkInDate()) || Objects.isNull(response.checkOutDate())) {
             throw new BadRequestException("Check-in and Check-out dates are required");
         }
 
-        if (response.totalPrice() == null || response.totalPrice().doubleValue() <= 0) {
+        if (Objects.isNull(response.totalPrice()) || response.totalPrice().doubleValue() <= 0) {
             throw new BadRequestException("Total price must be greater than 0");
         }
 
-        if (response.status() == null) {
+        if (Objects.isNull(response.status())) {
             throw new BadRequestException("Status is required");
         }
     }

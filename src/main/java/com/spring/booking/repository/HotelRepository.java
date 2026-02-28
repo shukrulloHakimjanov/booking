@@ -38,7 +38,7 @@ public interface HotelRepository extends JpaRepository<Hotels, Long> {
             @Param("searchText") String searchText,
             @Param("cityId") Long cityId,
             @Param("ownerId") Long ownerId,
-            @Param("minRating") BigDecimal minRating,
+            @Param("minRating") Float minRating,
             @Param("amenityId") Long amenityId,
             @Param("isActive") Boolean isActive,
             Pageable pageable

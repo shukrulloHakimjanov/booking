@@ -7,10 +7,7 @@ import com.spring.booking.entity.Bookings;
 import com.spring.booking.entity.Hotels;
 import com.spring.booking.entity.Review;
 import com.spring.booking.entity.User;
-import com.spring.booking.exception.exceptions404.BookingNotFoundException;
-import com.spring.booking.exception.exceptions404.HotelNotFoundException;
-import com.spring.booking.exception.exceptions404.ReviewNotFoundException;
-import com.spring.booking.exception.exceptions404.UserNotFoundException;
+import com.spring.booking.exception.NotFoundException;
 import com.spring.booking.mapper.ReviewMapper;
 import com.spring.booking.repository.BookingRepository;
 import com.spring.booking.repository.HotelRepository;
@@ -43,13 +40,13 @@ public class ReviewServiceImpl implements ReviewService {
     public ReviewResponse create(ReviewRequest request) {
 
         Bookings booking = bookingRepository.findById(request.bookingId())
-                .orElseThrow(() -> new BookingNotFoundException("Booking not found with id: " + request.bookingId()));
+                .orElseThrow(() -> new NotFoundException("Booking not found with id: " + request.bookingId()));
 
         User user = userRepository.findById(request.userId())
-                .orElseThrow(() -> new UserNotFoundException("User not found with id: " + request.userId()));
+                .orElseThrow(() -> new NotFoundException("User not found with id: " + request.userId()));
 
         Hotels hotel = hotelRepository.findById(request.hotelId())
-                .orElseThrow(() -> new HotelNotFoundException("Hotel not found with id: " + request.hotelId()));
+                .orElseThrow(() -> new NotFoundException("Hotel not found with id: " + request.hotelId()));
 
         Review review = reviewMapper.toEntity(request);
         review.setBooking(booking);
@@ -64,25 +61,25 @@ public class ReviewServiceImpl implements ReviewService {
     @Transactional
     public ReviewResponse update(Long id, ReviewRequest request) {
         Review review = reviewRepository.findById(id)
-                .orElseThrow(() -> new ReviewNotFoundException("Review not found with id: " + id));
+                .orElseThrow(() -> new NotFoundException("Review not found with id: " + id));
 
         reviewMapper.update(review, request);
 
         if (request.bookingId() != null) {
             Bookings booking = bookingRepository.findById(request.bookingId())
-                    .orElseThrow(() -> new BookingNotFoundException("Booking not found with id: " + request.bookingId()));
+                    .orElseThrow(() -> new NotFoundException("Booking not found with id: " + request.bookingId()));
             review.setBooking(booking);
         }
 
         if (request.userId() != null) {
             User user = userRepository.findById(request.userId())
-                    .orElseThrow(() -> new UserNotFoundException("User not found with id: " + request.userId()));
+                    .orElseThrow(() -> new NotFoundException("User not found with id: " + request.userId()));
             review.setUser(user);
         }
 
         if (request.hotelId() != null) {
             Hotels hotel = hotelRepository.findById(request.hotelId())
-                    .orElseThrow(() -> new HotelNotFoundException("Hotel not found with id: " + request.hotelId()));
+                    .orElseThrow(() -> new NotFoundException("Hotel not found with id: " + request.hotelId()));
             review.setHotel(hotel);
         }
 
@@ -93,7 +90,7 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public ReviewResponse get(Long id) {
         Review review = reviewRepository.findById(id)
-                .orElseThrow(() -> new ReviewNotFoundException("Review not found with id: " + id));
+                .orElseThrow(() -> new NotFoundException("Review not found with id: " + id));
         return reviewMapper.toResponse(review);
     }
 
@@ -106,7 +103,7 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public void delete(Long id) {
         if (!reviewRepository.existsById(id)) {
-            throw new ReviewNotFoundException("Review not found with id: " + id);
+            throw new NotFoundException("Review not found with id: " + id);
         }
         reviewRepository.deleteById(id);
     }

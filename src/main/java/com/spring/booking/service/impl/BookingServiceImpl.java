@@ -9,10 +9,7 @@ import com.spring.booking.entity.Bookings;
 import com.spring.booking.entity.Hotels;
 import com.spring.booking.entity.Rooms;
 import com.spring.booking.entity.User;
-import com.spring.booking.exception.exceptions404.BookingNotFoundException;
-import com.spring.booking.exception.exceptions404.HotelNotFoundException;
-import com.spring.booking.exception.exceptions404.RoomNotFoundException;
-import com.spring.booking.exception.exceptions404.UserNotFoundException;
+import com.spring.booking.exception.NotFoundException;
 import com.spring.booking.mapper.BookingMapper;
 import com.spring.booking.repository.BookingRepository;
 import com.spring.booking.repository.HotelRepository;
@@ -49,13 +46,13 @@ public class BookingServiceImpl implements BookingService {
     public BookingResponse create(BookingRequest request) {
 
         User user = userRepository.findById(request.userId())
-                .orElseThrow(() -> new UserNotFoundException("User not found with id: " + request.userId()));
+                .orElseThrow(() -> new NotFoundException("User not found with id: " + request.userId()));
 
         Hotels hotel = hotelRepository.findById(request.hotelId())
-                .orElseThrow(() -> new HotelNotFoundException("Hotel not found with id: " + request.hotelId()));
+                .orElseThrow(() -> new NotFoundException("Hotel not found with id: " + request.hotelId()));
 
         Rooms room = roomRepository.findById(request.roomId())
-                .orElseThrow(() -> new RoomNotFoundException("Room not found with id: " + request.roomId()));
+                .orElseThrow(() -> new NotFoundException("Room not found with id: " + request.roomId()));
 
         Bookings booking = bookingMapper.toEntity(request);
 
@@ -78,24 +75,24 @@ public class BookingServiceImpl implements BookingService {
     @Transactional
     public BookingResponse update(UUID id, BookingRequest request) {
 
-        Bookings booking = bookingRepository.findById(id).orElseThrow(() -> new BookingNotFoundException("Booking not found with id: " + id));
+        Bookings booking = bookingRepository.findById(id).orElseThrow(() -> new NotFoundException("Booking not found with id: " + id));
 
         BookingStatus oldStatus = booking.getStatus();
 
         bookingMapper.update(booking, request);
 
         if (request.userId() != null) {
-            User user = userRepository.findById(request.userId()).orElseThrow(() -> new UserNotFoundException("User not found with id: " + request.userId()));
+            User user = userRepository.findById(request.userId()).orElseThrow(() -> new NotFoundException("User not found with id: " + request.userId()));
             booking.setUser(user);
         }
 
         if (request.hotelId() != null) {
-            Hotels hotel = hotelRepository.findById(request.hotelId()).orElseThrow(() -> new HotelNotFoundException("Hotel not found with id: " + request.hotelId()));
+            Hotels hotel = hotelRepository.findById(request.hotelId()).orElseThrow(() -> new NotFoundException("Hotel not found with id: " + request.hotelId()));
             booking.setHotel(hotel);
         }
 
         if (request.roomId() != null) {
-            Rooms room = roomRepository.findById(request.roomId()).orElseThrow(() -> new RoomNotFoundException("Room not found with id: " + request.roomId()));
+            Rooms room = roomRepository.findById(request.roomId()).orElseThrow(() -> new NotFoundException("Room not found with id: " + request.roomId()));
             booking.setRoom(room);
         }
 
@@ -116,7 +113,7 @@ public class BookingServiceImpl implements BookingService {
     public void updateStatusAndPaymentId(UUID id, BookingStatus newStatus, String paymentId) {
 
         Bookings booking = bookingRepository.findById(id)
-                .orElseThrow(() -> new BookingNotFoundException("Booking not found with id: " + id));
+                .orElseThrow(() -> new NotFoundException("Booking not found with id: " + id));
 
         BookingStatus oldStatus = booking.getStatus();
 
@@ -148,7 +145,7 @@ public class BookingServiceImpl implements BookingService {
     @Transactional
     public BookingResponse updateStatus(UUID id, BookingStatus newStatus) {
 
-        Bookings booking = bookingRepository.findById(id).orElseThrow(() -> new BookingNotFoundException("Booking not found with id: " + id));
+        Bookings booking = bookingRepository.findById(id).orElseThrow(() -> new NotFoundException("Booking not found with id: " + id));
 
         BookingStatus oldStatus = booking.getStatus();
 
@@ -168,7 +165,7 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public BookingResponse get(UUID id) {
-        Bookings booking = bookingRepository.findById(id).orElseThrow(() -> new BookingNotFoundException("Booking not found with id: " + id));
+        Bookings booking = bookingRepository.findById(id).orElseThrow(() -> new NotFoundException("Booking not found with id: " + id));
         return bookingMapper.toResponse(booking);
     }
 
@@ -183,7 +180,7 @@ public class BookingServiceImpl implements BookingService {
     @Transactional
     public void delete(UUID id) {
         if (!bookingRepository.existsById(id)) {
-            throw new BookingNotFoundException("Booking not found with id: " + id);
+            throw new NotFoundException("Booking not found with id: " + id);
         }
         bookingRepository.deleteById(id);
     }

@@ -7,8 +7,8 @@ import com.spring.booking.dto.pageRequest.PageRequestDto;
 import com.spring.booking.dto.request.UserRequest;
 import com.spring.booking.dto.response.UserResponse;
 import com.spring.booking.entity.User;
-import com.spring.booking.exception.exception409.UserEmailAlreadyExistsException;
-import com.spring.booking.exception.exceptions404.UserNotFoundException;
+import com.spring.booking.exception.AlreadyExistsException;
+import com.spring.booking.exception.NotFoundException;
 import com.spring.booking.mapper.UserMapper;
 import com.spring.booking.repository.UserRepository;
 import com.spring.booking.service.UserService;
@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponse get(Long id) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
+                .orElseThrow(() -> new NotFoundException("User not found with id: " + id));
 
         return userMapper.toDto(user);
     }
@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponse update(Long id, UserRequest request) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
+                .orElseThrow(() -> new NotFoundException("User not found with id: " + id));
 
         userMapper.update(user, request);
 
@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(Long id) {
         if (!userRepository.existsById(id)) {
-            throw new UserNotFoundException("User not found with id: " + id);
+            throw new NotFoundException("User not found with id: " + id);
         }
         userRepository.deleteById(id);
     }
@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService {
 
     private void validateEmailUnique(String email) {
         if (userRepository.existsByEmail(email)) {
-            throw new UserEmailAlreadyExistsException("Email already exists: " + email);
+            throw new AlreadyExistsException("Email already exists: " + email);
         }
     }
 

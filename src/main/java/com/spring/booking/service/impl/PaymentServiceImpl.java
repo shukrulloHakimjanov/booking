@@ -5,7 +5,7 @@ import com.spring.booking.constant.enums.PaymentStatus;
 import com.spring.booking.dto.request.PaymentRequest;
 import com.spring.booking.dto.response.PaymentDTO;
 import com.spring.booking.entity.Payment;
-import com.spring.booking.exception.exceptions404.PaymentNotfoundException;
+import com.spring.booking.exception.NotFoundException;
 import com.spring.booking.mapper.PaymentMapper;
 import com.spring.booking.repository.PaymentRepository;
 import com.spring.booking.service.BookingService;
@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -88,7 +87,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     private Payment findPaymentById(Long id) {
         return paymentRepository.findById(id)
-                .orElseThrow(() -> new PaymentNotfoundException("Payment not found with id: " + id));
+                .orElseThrow(() -> new NotFoundException("Payment not found with id: " + id));
     }
 
 }
