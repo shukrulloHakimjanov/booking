@@ -83,6 +83,6 @@ application:
         expiration: 604800000 # 7 days
 
 bank:
-  receiver-name: CONSTANT_RECEIVER_NAME
-  receiver-token: CONSTANT_RECEIVER_TOKEN
-  merchant: 85ef6051-718f-49db-9a5c-c95525d0b74e
+  receiver-name: Shukrullo
+  receiver-token: 4c486a4c-cb98-424a-8cd3-c34a9fd76985
+  merchant:  3cdd0d43-a75d-4949-85c9-7819a4c89861

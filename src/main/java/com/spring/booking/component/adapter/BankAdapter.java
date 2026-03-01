@@ -55,5 +55,6 @@ public class BankAdapter {
                 .body(bankRequest)
                 .retrieve()
                 .toBodilessEntity();
+        log.info("Transaction created successfully in J_BANK");
     }
 }

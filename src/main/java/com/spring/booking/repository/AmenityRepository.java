@@ -14,9 +14,5 @@ public interface AmenityRepository extends JpaRepository<Amenities, Long> {
             "OR LOWER(a.category) LIKE LOWER(CONCAT('%', :searchText, '%')))")
     Page<Amenities> findAllWithSearch(@Param("searchText") String searchText, Pageable pageable);
 
-    @Query("SELECT CASE WHEN COUNT(e) > 0 THEN true ELSE false END " +
-            "FROM Amenities e " +
-            "WHERE LOWER(e.name) = LOWER(:name)")
-    Boolean existsByNameIgnoreCase(@Param("name") String name);
 
 }

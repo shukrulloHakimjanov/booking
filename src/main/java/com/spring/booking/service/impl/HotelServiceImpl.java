@@ -54,6 +54,10 @@ public class HotelServiceImpl implements HotelService {
     public HotelResponse update(Long id, HotelRequest request) {
         Hotels hotel = hotelRepository.findById(id).orElseThrow(() -> new NotFoundException("Hotel not found with id: " + id));
 
+        City city = citiesRepository.findById(request.cityId()).orElseThrow(() -> new NotFoundException("City not found with id: " + request.cityId()));
+
+        hotel.setCity(city);
+
         hotelMapper.update(hotel, request);
 
         setAttachmentsAndAmenities(hotel, request);
