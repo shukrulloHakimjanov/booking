@@ -23,7 +23,7 @@ public class Rooms extends BaseEntity {
     @Column(name = "room_type_id", insertable = false, updatable = false)
     Long roomTypeId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "room_type_id")
     RoomTypes roomType;
 

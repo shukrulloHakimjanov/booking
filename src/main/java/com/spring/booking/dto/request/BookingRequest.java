@@ -39,13 +39,6 @@ public record BookingRequest(
         @DecimalMin(value = "0.0", inclusive = false, message = "Total price must be positive")
         BigDecimal totalPrice,
 
-        @Size(max = 3, message = "Currency code must be 3 letters")
-        String currency,
-
-        BookingStatus status,
-
-        String paymentId,
-
         String specialRequests,
 
         List<GuestInfo> guests

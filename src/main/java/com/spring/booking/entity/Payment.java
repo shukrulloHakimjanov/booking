@@ -1,5 +1,6 @@
 package com.spring.booking.entity;
 
+import com.spring.booking.constant.enums.Currency;
 import com.spring.booking.constant.enums.PaymentMethod;
 import com.spring.booking.constant.enums.PaymentStatus;
 import jakarta.persistence.*;
@@ -32,7 +33,8 @@ public class Payment extends BaseEntity {
     private BigDecimal amount;
 
     @Column(length = 3, nullable = false)
-    private String currency;
+    @Enumerated(EnumType.STRING)
+    private Currency currency;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "payment_method", length = 30, nullable = false)

@@ -1,14 +1,14 @@
 CREATE TABLE room_types
 (
     id                BIGSERIAL PRIMARY KEY,
-    hotel_id          BIGINT       NOT NULL,
+    hotel_id          BIGINT NOT NULL,
     name              VARCHAR(100) NOT NULL,
     description       TEXT,
-    max_guests        INT          NOT NULL,
+    max_guests        INT NOT NULL,
     bed_configuration TEXT,
-    created_at        TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    created_at        TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at        TIMESTAMP,
-    is_active         BOOLEAN      NOT NULL DEFAULT TRUE,
+    is_active         BOOLEAN NOT NULL DEFAULT TRUE,
 
     CONSTRAINT fk_room_types_hotel FOREIGN KEY (hotel_id) REFERENCES hotels (id) ON DELETE CASCADE,
     CONSTRAINT chk_max_guests CHECK (max_guests > 0)

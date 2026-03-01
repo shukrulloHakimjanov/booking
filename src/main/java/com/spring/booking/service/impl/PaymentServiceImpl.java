@@ -1,6 +1,7 @@
 package com.spring.booking.service.impl;
 
 import com.spring.booking.constant.enums.BookingStatus;
+import com.spring.booking.constant.enums.Currency;
 import com.spring.booking.constant.enums.PaymentStatus;
 import com.spring.booking.dto.request.PaymentRequest;
 import com.spring.booking.dto.response.PaymentDTO;
@@ -33,7 +34,7 @@ public class PaymentServiceImpl implements PaymentService {
         Payment payment = Payment.builder()
                 .bookingId(request.referenceId())
                 .amount(request.amount())
-                .currency(request.currency())
+                .currency(Currency.USD)
                 .paymentMethod(request.paymentMethod())
                 .status(PaymentStatus.PENDING)
                 .isActive(true)

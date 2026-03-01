@@ -81,7 +81,7 @@ public class RoomController {
         return ResponseEntity.ok(roomService.getByHotelIdAndStatus(hotelId, status, pageRequestDtoParams));
     }
 
-    @Operation(summary = "Soft delete room")
+    @Operation(summary = "delete room")
     @DeleteMapping("/{id}/delete")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         roomService.deleteById(id);

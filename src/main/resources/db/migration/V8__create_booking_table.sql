@@ -8,7 +8,6 @@ CREATE TABLE booking
     check_out_date   DATE NOT NULL,
     num_guests       INTEGER NOT NULL,
     total_price      NUMERIC(10, 2) NOT NULL,
-    currency         VARCHAR(10),
     status           VARCHAR(40) NOT NULL,
     special_requests TEXT,
     payment_id       VARCHAR(255),

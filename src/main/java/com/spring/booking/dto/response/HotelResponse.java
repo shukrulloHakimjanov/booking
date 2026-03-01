@@ -1,12 +1,14 @@
 package com.spring.booking.dto.response;
 
-import java.math.BigDecimal;
+import com.spring.booking.dto.projections.IdFirstNameDto;
+import com.spring.booking.dto.projections.IdKeyDto;
+
 import java.time.LocalTime;
 import java.util.List;
 
 public record HotelResponse(
         Long id,
-        UserResponse owner,
+        IdFirstNameDto owner,
         CityRepsonse city,
         String name,
         String description,
@@ -14,7 +16,7 @@ public record HotelResponse(
         Float rating,
         LocalTime checkInTime,
         LocalTime checkOutTime,
-        List<AttachmentDto> attachments,
+        List<IdKeyDto> attachments,
         List<AmenityResponse> amenities
 ) {
 }

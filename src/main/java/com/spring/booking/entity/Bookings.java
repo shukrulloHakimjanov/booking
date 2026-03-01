@@ -61,9 +61,7 @@ public class Bookings extends BaseEntity {
     @Column(name = "total_price")
     BigDecimal totalPrice;
 
-    @Column(name = "currency", length = 10)
-    @Enumerated(EnumType.STRING)
-    Currency currency;
+
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", length = 40, nullable = false)

@@ -21,6 +21,8 @@ public interface BookingMapper {
     @Mapping(target = "hotel", ignore = true)
     @Mapping(target = "room", ignore = true)
     @Mapping(target = "expireDate", ignore = true)
+    @Mapping(target = "status", ignore = true)
+    @Mapping(target = "paymentId", ignore = true)
     Bookings toEntity(BookingRequest request);
 
     @Mapping(target = "id", ignore = true)
@@ -31,5 +33,7 @@ public interface BookingMapper {
     @Mapping(target = "hotel", ignore = true)
     @Mapping(target = "room", ignore = true)
     @Mapping(target = "expireDate", ignore = true)
+    @Mapping(target = "status", ignore = true)
+    @Mapping(target = "paymentId", ignore = true)
     void update(@MappingTarget Bookings entity, BookingRequest request);
 }
