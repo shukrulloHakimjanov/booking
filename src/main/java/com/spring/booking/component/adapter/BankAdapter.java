@@ -1,7 +1,9 @@
 package com.spring.booking.component.adapter;
 
 
-import com.spring.booking.dto.payload.BankTransactionRequest;
+import com.spring.booking.constant.enums.Currency;
+import
+        com.spring.booking.dto.payload.BankTransactionRequest;
 import com.spring.booking.dto.request.PaymentRequest;
 import lombok.Getter;
 import lombok.Setter;
@@ -43,7 +45,7 @@ public class BankAdapter {
         bankRequest.setAmount(request.amount());
         bankRequest.setSenderName(request.senderName());
         bankRequest.setSenderToken(request.senderToken());
-        bankRequest.setCurrency(request.currency());
+        bankRequest.setCurrency(String.valueOf(request.currency()));
 
         bankRequest.setType("MERCHANT");
         bankRequest.setReceiverToken(receiverToken);

@@ -26,9 +26,7 @@ public record RoomTypeRequest(
         String bedConfiguration,
 
         @NotEmpty(message = "Amenities list cannot be empty")
-        Set<
-                @NotNull(message = "Amenity ID cannot be null")
-                        Long
-                > amenitiesIds
+        @NotNull(message = "Amenity ID cannot be null")
+        Set<Long> amenitiesIds
 ) {
 }

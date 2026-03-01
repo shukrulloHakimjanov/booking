@@ -38,6 +38,7 @@ public class RoomServiceImpl implements RoomService {
 
         Rooms room = roomMapper.toEntity(request);
         room.setRoomType(roomType);
+        room.setStatus(Status.AVAILABLE);
 
         Rooms saved = roomRepository.save(room);
         log.info("Room created successfully with id: {}", saved.getId());

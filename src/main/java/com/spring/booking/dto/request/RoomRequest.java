@@ -21,9 +21,6 @@ public record RoomRequest(
         @Min(value = 0, message = "Floor must be 0 or higher")
         Integer floor,
 
-        @NotNull(message = "Status cannot be null")
-        Status status,
-
         AccommodationType accommodationType
 ) {
 }

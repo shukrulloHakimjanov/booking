@@ -2,6 +2,7 @@ package com.spring.booking.service.impl;
 
 import com.spring.booking.component.publisher.BookingEventPublisher;
 import com.spring.booking.constant.enums.BookingStatus;
+import com.spring.booking.constant.enums.Status;
 import com.spring.booking.dto.pageRequest.PageRequestDto;
 import com.spring.booking.dto.request.BookingRequest;
 import com.spring.booking.dto.response.BookingResponse;
@@ -16,6 +17,7 @@ import com.spring.booking.repository.HotelRepository;
 import com.spring.booking.repository.RoomRepository;
 import com.spring.booking.repository.UserRepository;
 import com.spring.booking.service.BookingService;
+import com.spring.booking.service.RoomService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -38,6 +40,7 @@ public class BookingServiceImpl implements BookingService {
     UserRepository userRepository;
     HotelRepository hotelRepository;
     RoomRepository roomRepository;
+    RoomService roomService;
     BookingMapper bookingMapper;
     BookingEventPublisher bookingEventPublisher;
 
@@ -64,6 +67,9 @@ public class BookingServiceImpl implements BookingService {
 
 
         Bookings saved = bookingRepository.save(booking);
+
+        roomService.updateStatus(request.roomId(), Status.OCCUPIED);
+
         BookingResponse response = bookingMapper.toResponse(saved);
 
         bookingEventPublisher.sendBookingEvent(response);
